@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schema.management.azure.com/schemas/0.1.2-preview/CreateUIDefinition.MultiVm.json#",
   "handler": "Microsoft.Compute.MultiVm",
   "version": "0.1.2-preview",
   "parameters": {
@@ -318,8 +319,8 @@
             "subnets": "Subnets"
           },
           "toolTip": {
-            "virtualNetwork": "",
-            "subnets": ""
+            "virtualNetwork": "Virtual network",
+            "subnets": "Subnets"
           },
           "defaultValue": {
             "addressPrefixSize": "/16"
