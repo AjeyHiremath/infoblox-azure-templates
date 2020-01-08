@@ -2,13 +2,19 @@
   "$schema":"https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion":"1.0.0.0",
   "parameters":{
-    "artifactsBaseUrl": {
+    "_artifactsLocation":{
       "type": "string",
-      "metadata": {
-        "description": "The base URL for dependent assets",
-        "artifactsBaseUrl": ""
+      "metadata":{
+        "description": "The base URL for dependent assets"
       },
-      "defaultValue": "https://raw.githubusercontent.com/infobloxopen/infoblox-azure-templates/master/main/"
+      "defaultValue": "https://raw.githubusercontent.com/infobloxopen/infoblox-azure-templates/master/main/" 
+    },
+    "_artifactsLocationSasToken":{
+      "type":"securestring",
+      "metadata":{
+        "description":"The sasToken required to access _artifactsLocation.  When the template is deployed using the accompanying scripts, a sasToken will be automatically generated. Use the defaultValue if the staging location is not secured."
+      },
+      "defaultValue": ""
     },
     "location": {
       "type": "string",
@@ -324,19 +330,19 @@
     "storageAccountForLogsName":"[variables(concat('storageAccountForLogsNameNeedFix-', string(parameters('storageAccountForLogsNeedFix'))))]",
     "storageAccountForLogsNameNeedFix-true":"[concat(parameters('newStorageAccountForLogsName'), 'logs')]",
     "storageAccountForLogsNameNeedFix-false":"[parameters('newStorageAccountForLogsName')]",
-    "storageAccountSetupURL":"[concat(parameters('artifactsBaseUrl'),'/storageAccount-',parameters('storageAccountNewOrExisting'),'.json')]",
-    "storageAccountForLogsSetupURL":"[concat(parameters('artifactsBaseUrl'),'/storageAccount-',parameters('storageAccountForLogsNewOrExisting'),'.json')]",
-    "publicIPSetupURL":"[concat(parameters('artifactsBaseUrl'),'/publicip-',parameters('publicIPNewOrExistingOrNone'),'.json')]",
-    "virtualNetworkSetupURL":"[concat(parameters('artifactsBaseUrl'),'/vnet-',parameters('vnetNewOrExisting'),'.json')]",
-    "nicPrimarySetupURL":"[concat(parameters('artifactsBaseUrl'),'/nic-pip',variables('publicIPExistingOrNone'),'.json')]",
-    "nicSecondarySetupURL":"[concat(parameters('artifactsBaseUrl'),'/nic-pipnone.json')]",
+    "storageAccountSetupURL":"[concat(parameters('_artifactsLocation'),'/storageAccount-',parameters('storageAccountNewOrExisting'),'.json',parameters('_artifactsLocationSasToken'))]",
+    "storageAccountForLogsSetupURL":"[concat(parameters('_artifactsLocation'),'/storageAccount-',parameters('storageAccountForLogsNewOrExisting'),'.json',parameters('_artifactsLocationSasToken'))]",
+    "publicIPSetupURL":"[concat(parameters('_artifactsLocation'),'/publicip-',parameters('publicIPNewOrExistingOrNone'),'.json',parameters('_artifactsLocationSasToken'))]",
+    "virtualNetworkSetupURL":"[concat(parameters('_artifactsLocation'),'/vnet-',parameters('vnetNewOrExisting'),'.json',parameters('_artifactsLocationSasToken'))]",
+    "nicPrimarySetupURL":"[concat(parameters('_artifactsLocation'),'/nic-pip',variables('publicIPExistingOrNone'),'.json',parameters('_artifactsLocationSasToken'))]",
+    "nicSecondarySetupURL":"[concat(parameters('_artifactsLocation'),'/nic-pipnone.json',parameters('_artifactsLocationSasToken'))]",
 
     "customData": "[base64(concat('temp_license: ', variables('tempLicense'), '\n', 'default_admin_password: ', variables('sq'), replace(parameters('adminPassword'), variables('sq'), concat(variables('sq'), variables('sq'))), variables('sq'), '\n', parameters('customData')))]",
 
     "availabilitySetNewOrNone": "[replace(parameters('availabilitySetNewOrExistingOrNone'), 'existing', 'none')]",
     "availabilitySetExistingOrNone": "[replace(parameters('availabilitySetNewOrExistingOrNone'), 'new', 'existing')]",
 
-    "availabilitySetSetupURL":"[concat(parameters('artifactsBaseUrl'),'/availabilityset-',variables('availabilitySetNewOrNone'),'.json')]",
+    "availabilitySetSetupURL":"[concat(parameters('_artifactsLocation'),'/availabilityset-',variables('availabilitySetNewOrNone'),'.json',parameters('_artifactsLocationSasToken'))]",
     "sq":"'",
     "osProfile":{
       "computerName":"[parameters('vmName')]",
@@ -344,7 +350,7 @@
       "adminPassword":"[parameters('adminPassword')]",
       "customData": "[variables('customData')]"
     },
-    "virtualMachineSetURL":"[concat(parameters('artifactsBaseUrl'),'/vm-availabilityset-', variables('availabilitySetExistingOrNone'),'.json')]"
+    "virtualMachineSetURL":"[concat(parameters('_artifactsLocation'),'/vm-availabilityset-', variables('availabilitySetExistingOrNone'),'.json,parameters('_artifactsLocationSasToken')')]"
   },
   "resources":[
     {
