@@ -68,7 +68,7 @@
       },
       "allowedValues":[
         "latest",
-        "843.383835.0"
+        "850.394706.0"
       ]
     },
     "adminPassword":{
@@ -298,7 +298,7 @@
   },
   "variables":{
     "imagePublisher":"infoblox",
-    "imageOffer":"infoblox-cp-v1405",
+    "imageOffer":"infoblox-appliances-for-850",
     "imageSKU": "[variables(concat('imageSKUSoT-', variables('imageSKUSoT')))]",
     "imageSKUSoT": "[contains(parameters('niosModel'), 'IB-V')]",
     "imageSKUSoT-true": "vsot",
@@ -350,7 +350,7 @@
       "adminPassword":"[parameters('adminPassword')]",
       "customData": "[variables('customData')]"
     },
-    "virtualMachineSetURL":"[concat(parameters('_artifactsLocation'),'/vm-availabilityset-', variables('availabilitySetExistingOrNone'),'.json,parameters('_artifactsLocationSasToken')')]"
+    "virtualMachineSetURL":"[concat(parameters('_artifactsLocation'),'/vm-availabilityset-', variables('availabilitySetExistingOrNone'),'.json',parameters('_artifactsLocationSasToken')')]"
   },
   "resources":[
     {
