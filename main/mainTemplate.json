@@ -313,7 +313,7 @@
     "OSDiskName":"[concat(parameters('vmName'), uniqueString(resourceGroup().id))]",
     "vmStorageAccountContainerName":"disks",
     "vnetResourceId":"[variables(concat('vnet-',parameters('vnetNewOrExisting')))]",
-    #"vnet-new":"[resourceId('Microsoft.Network/virtualNetworks',parameters('virtualNetworkName'))]",
+    "vnet-new":"[resourceId('Microsoft.Network/virtualNetworks',parameters('virtualNetworkName'))]",
     "vnet-existing":"[resourceId('Microsoft.Network/virtualNetworks',parameters('virtualNetworkName'))]",
     "subnet1ResourceId":"resourceId(parameters('virtualNetworkExistingRGName'),'Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), parameters('subnet1Name'))",
     "subnet2ResourceId":"resourceId(parameters('virtualNetworkExistingRGName'),'Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), parameters('subnet2Name'))",
@@ -322,7 +322,7 @@
     "nicSecondaryName": "[concat(parameters('vmName'),'-mgmt')]",
     "publicIPExistingOrNone": "[replace(parameters('publicIPNewOrExistingOrNone'), 'new', 'existing')]",
     "publicIpResourceId":"[variables(concat('publicIp-',parameters('publicIPNewOrExistingOrNone')))]",
-    #"publicIp-new": "[resourceId(concat('Microsoft.Network','/','publicIPAddresses'),parameters('publicIPAddressName'))]",
+    "publicIp-new": "[resourceId(concat('Microsoft.Network','/','publicIPAddresses'),parameters('publicIPAddressName'))]",
     "publicIp-existing": "[resourceId(parameters('publicIPExistingRGName'),concat('Microsoft.Network','/','publicIPAddresses'),parameters('publicIPAddressName'))]",
     "publicIp-none": "",
     "deploymentApiVersion":"2019-05-01",
@@ -354,7 +354,7 @@
   },
   "resources":[
     {
-      "name": "pid-6296147f-669c-41b4-adfa-c20bdaf32742",
+      "name": "pid-aa80ac30-da74-56ab-b79e-eb397c6a205f",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2019-05-01",
       "properties": {
