@@ -314,9 +314,9 @@
     "vmStorageAccountContainerName":"disks",
     "vnetResourceId":"[variables(concat('vnet-',parameters('vnetNewOrExisting')))]",
     "vnet-new":"[resourceId('Microsoft.Network/virtualNetworks',parameters('virtualNetworkName'))]",
-    "vnet-existing":"[resourceId('Microsoft.Network/virtualNetworks',parameters('virtualNetworkName'))]",
-    "subnet1ResourceId":"resourceId(parameters('virtualNetworkExistingRGName'),'Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), parameters('subnet1Name'))",
-    "subnet2ResourceId":"resourceId(parameters('virtualNetworkExistingRGName'),'Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), parameters('subnet2Name'))",
+    "vnet-existing":"[resourceId(parameters('virtualNetworkExistingRGName'),'Microsoft.Network/virtualNetworks',parameters('virtualNetworkName'))]",
+    "subnet1ResourceId":"[resourceId(parameters('virtualNetworkExistingRGName'),'Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), parameters('subnet1Name'))]",
+    "subnet2ResourceId":"[resourceId(parameters('virtualNetworkExistingRGName'),'Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), parameters('subnet2Name'))]",
     "nsgName": "[concat(parameters('vmName'),'-securityGroup')]",
     "nicPrimaryName": "[concat(parameters('vmName'),'-lan1')]",
     "nicSecondaryName": "[concat(parameters('vmName'),'-mgmt')]",
@@ -350,7 +350,7 @@
       "adminPassword":"[parameters('adminPassword')]",
       "customData": "[variables('customData')]"
     },
-    "virtualMachineSetURL":"[concat(parameters('_artifactsLocation'),'/vm-availabilityset-', variables('availabilitySetExistingOrNone'),'.json',parameters('_artifactsLocationSasToken')')]"
+    "virtualMachineSetURL":"[concat(parameters('_artifactsLocation'),'/vm-availabilityset-', variables('availabilitySetExistingOrNone'),'.json',parameters('_artifactsLocationSasToken'))]"
   },
   "resources":[
     {
@@ -419,7 +419,7 @@
       }
     },
     {
-      "apiVersion": "[variables('deploymentApiVersion')]",
+      "apiVersion": "2019-11-01",
       "type": "Microsoft.Network/networkSecurityGroups",
       "name": "[variables('nsgName')]",
       "location": "[parameters('location')]",
